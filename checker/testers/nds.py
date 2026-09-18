@@ -47,7 +47,12 @@ class NdsTester(Tester):
     ) -> None:
         # nds-grade builds and tests in one pass, so the work happens in
         # _run_tests; what this stage owes it is the three directories.
-        self._nds_dirs = (source_dir, public_tests_dir, private_tests_dir)
+        #
+        # Resolved here, while the cwd is still the one `checker grade` was
+        # started in: the driver hands out paths relative to it, and the
+        # sandbox runs nds-grade from the build directory instead.
+        self._nds_dirs = (source_dir.resolve(), public_tests_dir.resolve(),
+                          private_tests_dir.resolve())
 
     def _clean_build(  # type: ignore[override]
             self,
