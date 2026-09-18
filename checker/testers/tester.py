@@ -96,6 +96,9 @@ class Tester:
         elif system == 'cpp':
             from . import cpp
             return cpp.CppTester(cleanup=cleanup, dry_run=dry_run)
+        elif system == 'nds':
+            from . import nds
+            return nds.NdsTester(cleanup=cleanup, dry_run=dry_run)
         else:
             raise TesterNotImplemented(f'Tester for <{system}> are not supported right now')
 
